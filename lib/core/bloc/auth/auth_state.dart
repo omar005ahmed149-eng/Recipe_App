@@ -1,4 +1,4 @@
-import 'package:movies/core/models/user_model.dart';
+import 'package:recipes/core/models/user_model.dart';
 
 enum AuthStatus { unknown, authenticated, unauthenticated }
 

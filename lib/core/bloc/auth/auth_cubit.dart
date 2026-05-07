@@ -1,14 +1,15 @@
 import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:movies/core/bloc/auth/auth_state.dart';
-import 'package:movies/core/bloc/movies/movies_cubit.dart';
-import 'package:movies/core/models/user_model.dart';
-import 'package:movies/firebase/firebase_services.dart';
+import 'package:recipes/core/bloc/auth/auth_state.dart';
+import 'package:recipes/core/models/user_model.dart';
+import 'package:recipes/firebase/firebase_services.dart';
+
+import '../reciepes/reciepes_cubit.dart';
 
 class AuthCubit extends Cubit<AuthState> {
-  AuthCubit(this._moviesCubit) : super(const AuthState());
+  AuthCubit(this._recipesCubit) : super(const AuthState());
 
-  final MoviesCubit _moviesCubit;
+  final ReciepesCubit _recipesCubit;
 
   Future<void> bootstrapSession() async {
     final firebaseUser = FirebaseAuth.instance.currentUser;
@@ -24,8 +25,8 @@ class AuthCubit extends Cubit<AuthState> {
       return;
     }
 
-    _moviesCubit.setPoster(user.poster);
-    await _moviesCubit.loadFromFirestore();
+    _recipesCubit.setPoster(user.poster);
+    await _recipesCubit.loadFromFirestore();
     emit(state.copyWith(status: AuthStatus.authenticated, user: user));
   }
 
@@ -42,8 +43,8 @@ class AuthCubit extends Cubit<AuthState> {
       emit(state.copyWith(status: AuthStatus.unauthenticated, clearUser: true));
       return null;
     }
-    _moviesCubit.setPoster(user.poster);
-    await _moviesCubit.loadFromFirestore();
+    _recipesCubit.setPoster(user.poster);
+    await _recipesCubit.loadFromFirestore();
     emit(state.copyWith(status: AuthStatus.authenticated, user: user));
     return user;
   }
@@ -66,7 +67,7 @@ class AuthCubit extends Cubit<AuthState> {
   }
 
   Future<void> logout() async {
-    _moviesCubit.clearAll();
+    _recipesCubit.clearAll();
     await FirebaseAuth.instance.signOut();
     emit(state.copyWith(status: AuthStatus.unauthenticated, clearUser: true));
   }

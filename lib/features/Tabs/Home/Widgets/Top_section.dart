@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movies/core/resources/colors_manger.dart';
-import 'package:movies/features/movie_details/movie_details_screen.dart';
+import 'package:recipes/core/resources/colors_manger.dart';
+import 'package:recipes/features/recipe_details/recipe_details_screen.dart';
 
 import '../../../../core/resources/assets_manger.dart';
 import '../bloc/home_bloc.dart';
-import '../../../../core/models/Movie_Model.dart';
-import '../../../../core/models/Movies_Data.dart';
+import '../../../../core/models/recipe_Model.dart';
+import '../../../../core/models/recipes_Data.dart';
 import 'Rating_Badge.dart';
 
 class TopSection extends StatelessWidget {
@@ -33,13 +33,13 @@ class TopSection extends StatelessWidget {
           height: 360.h,
           child: PageView.builder(
             controller: _pageController,
-            itemCount: MovieData.featuredMovies.length,
+            itemCount: ReciepeData.featuredReciepes.length,
             onPageChanged: (index) {
               context.read<HomeBloc>().add(HomePageChanged(index));
             },
             itemBuilder: (context, index) {
               return HeroCard(
-                movie: MovieData.featuredMovies[index],
+                recipe: ReciepeData.featuredReciepes[index],
                 isActive: index == activeIndex,
               );
             },
@@ -51,10 +51,10 @@ class TopSection extends StatelessWidget {
 }
 
 class HeroCard extends StatelessWidget {
-  final MovieModel movie;
+  final ReciepeModel recipe;
   final bool isActive;
 
-  const HeroCard({super.key, required this.movie, required this.isActive});
+  const HeroCard({super.key, required this.recipe, required this.isActive});
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +62,7 @@ class HeroCard extends StatelessWidget {
       onTap: () => Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (_) => MovieDetailsScreen(movie: movie),
+          builder: (_) => recipeDetailsScreen(recipe: recipe),
         ),
       ),
       child: AnimatedScale(
@@ -79,14 +79,14 @@ class HeroCard extends StatelessWidget {
                 Container(
                   color: ColorsManger.white,
                   child: Image.asset(
-                    movie.poster_image,
+                    recipe.poster_image,
                     fit: BoxFit.cover,
                   ),
                 ),
                 Positioned(
                   top: 10,
                   left: 10,
-                  child: RatingBadge(rating: movie.rating),
+                  child: RatingBadge(rating: recipe.rating),
                 ),
               ],
             ),

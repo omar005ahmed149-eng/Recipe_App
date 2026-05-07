@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/widgets/Category_card.dart';
-import '../../../../core/models/Movie_Model.dart';
+import '../../../../core/models/recipe_Model.dart';
 
 class BottomSection extends StatelessWidget {
-  const BottomSection({super.key, required this.label, required this.movies});
+  const BottomSection({super.key, required this.label, required this.recipes});
 
   final String label;
-  final List<MovieModel> movies;
+  final List<ReciepeModel> recipes;
 
   @override
   Widget build(BuildContext context) {
@@ -46,13 +46,13 @@ class BottomSection extends StatelessWidget {
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
               padding: const EdgeInsets.symmetric(horizontal: 20),
-              itemCount: movies.length,
+              itemCount: recipes.length,
               separatorBuilder: (_, __) => const SizedBox(width: 12),
               itemBuilder: (context, index) {
                 return CategoryCard(
-                  rating: movies[index].rating,
-                  poster_image: movies[index].poster_image,
-                  movie: movies[index], // pass full movie for navigation
+                  rating: recipes[index].rating,
+                  poster_image: recipes[index].poster_image,
+                  recipe: recipes[index], // pass full recipe for navigation
                 );
               },
             ),

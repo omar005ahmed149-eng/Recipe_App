@@ -1,20 +1,8 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-
-    // Users collection
     match /users/{userId} {
       allow read, write: if request.auth != null && request.auth.uid == userId;
-
-      // Watchlist sub-collection
-      match /watchlist/{movieId} {
-        allow read, write: if request.auth != null && request.auth.uid == userId;
-      }
-
-      // History sub-collection
-      match /history/{movieId} {
-        allow read, write: if request.auth != null && request.auth.uid == userId;
-      }
     }
   }
 }

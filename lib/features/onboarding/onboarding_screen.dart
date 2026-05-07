@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:movies/core/resources/colors_manger.dart';
-import 'package:movies/features/auth/register/registerScreen.dart';
+import 'package:recipes/core/resources/colors_manger.dart';
+import 'package:recipes/features/auth/register/registerScreen.dart';
 import '../../../services/local_storage.dart';
 import '../../core/resources/assets_manger.dart';
 import 'onboarding_item.dart';
@@ -21,28 +21,28 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
   final List<OnBoardingModel> pages = [
     OnBoardingModel(
-      title: "Find Your Next Favorite Movie Here",
-      subtitle: "Get access to a huge library of movies to suit all tastes. You will surely like it.",
+      title: "Find Your Next Favorite recipe Here",
+      subtitle: "Get access to a huge library of reciepes to suit all tastes. You will surely like it.",
       image: AssetsManger.poster1,
     ),
     OnBoardingModel(
-      title: "Discover Movies",
-      subtitle: "Explore a vast collection of movies in all qualities and genres. Find your next favorite film with ease.",
+      title: "Discover recipes",
+      subtitle: "Explore a vast collection of reciepes in all qualities and genres. Find your next favorite film with ease.",
       image: AssetsManger.poster2,
     ),
     OnBoardingModel(
       title: "Explore All Genres",
-      subtitle: "Discover movies from every genre, in all available qualities. Find something new and exciting to watch every day.",
+      subtitle: "Discover reciepes from every genre, in all available qualities. Find something new and exciting to watch every day.",
       image: AssetsManger.poster3,
     ),
     OnBoardingModel(
       title: "Create Watchlists",
-      subtitle: "Save movies to your watchlist to keep track of what you want to watch next. Enjoy films in various qualities and genres.",
+      subtitle: "Save reciepes to your watchlist to keep track of what you want to watch next. Enjoy films in various qualities and genres.",
       image: AssetsManger.poster4,
     ),
     OnBoardingModel(
       title: "Rate, Review and Learn",
-      subtitle: "Share your thoughts on the movies you've watched. Dive deep into film details and help others discover great movies with your reviews.",
+      subtitle: "Share your thoughts on the reciepes you've watched. Dive deep into film details and help others discover great reciepes with your reviews.",
       image: AssetsManger.poster5,
     ),
     OnBoardingModel(

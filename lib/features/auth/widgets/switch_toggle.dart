@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:movies/core/resources/assets_manger.dart';
-import 'package:movies/core/resources/colors_manger.dart';
+import 'package:recipes/core/resources/assets_manger.dart';
+import 'package:recipes/core/resources/colors_manger.dart';
 
 class SwitchToggle extends StatefulWidget {
   const SwitchToggle({super.key});

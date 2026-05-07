@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movies/core/bloc/movies/movies_cubit.dart';
-import 'package:movies/core/bloc/movies/movies_state.dart';
-import 'package:movies/core/models/Movie_Model.dart';
-import 'package:movies/core/resources/assets_manger.dart';
-import 'package:movies/core/resources/colors_manger.dart';
-import 'package:movies/features/movie_details/movie_details_screen.dart';
+
+import 'package:recipes/core/models/recipe_Model.dart';
+import 'package:recipes/core/resources/assets_manger.dart';
+import 'package:recipes/core/resources/colors_manger.dart';
+import 'package:recipes/features/recipe_details/recipe_details_screen.dart';
+
+import '../../../../core/bloc/reciepes/reciepes_cubit.dart';
+import '../../../../core/bloc/reciepes/reciepes_state.dart';
 
 class BottomSection extends StatelessWidget {
   final int selectedTab;
@@ -14,9 +16,9 @@ class BottomSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<MoviesCubit, MoviesState>(
+    return BlocBuilder<ReciepesCubit, ReciepesState>(
       builder: (context, state) {
-        final List<MovieModel> currentList = selectedTab == 0
+        final List<ReciepeModel> currentList = selectedTab == 0
             ? state.watchList
             : state.history;
 
@@ -29,8 +31,8 @@ class BottomSection extends StatelessWidget {
                 SizedBox(height: 12.h),
                 Text(
                   selectedTab == 0
-                      ? 'No bookmarked movies yet'
-                      : 'No movies watched yet',
+                      ? 'No bookmarked reciepes yet'
+                      : 'No reciepes watched yet',
                   style: TextStyle(
                     color: Colors.white38,
                     fontSize: 14.sp,
@@ -51,12 +53,12 @@ class BottomSection extends StatelessWidget {
           ),
           itemCount: currentList.length,
           itemBuilder: (_, i) {
-            final movie = currentList[i];
+            final recipe = currentList[i];
             return GestureDetector(
               onTap: () => Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (_) => MovieDetailsScreen(movie: movie),
+                  builder: (_) => recipeDetailsScreen(recipe: recipe),
                 ),
               ),
               child: ClipRRect(
@@ -64,7 +66,7 @@ class BottomSection extends StatelessWidget {
                 child: Stack(
                   fit: StackFit.expand,
                   children: [
-                    Image.asset(movie.poster_image, fit: BoxFit.cover),
+                    Image.asset(recipe.poster_image, fit: BoxFit.cover),
                     Positioned(
                       top: 6,
                       left: 6,
@@ -81,7 +83,7 @@ class BottomSection extends StatelessWidget {
                                 color: ColorsManger.yellow, size: 10.r),
                             SizedBox(width: 2.w),
                             Text(
-                              movie.rating,
+                              recipe.rating,
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 10.sp,

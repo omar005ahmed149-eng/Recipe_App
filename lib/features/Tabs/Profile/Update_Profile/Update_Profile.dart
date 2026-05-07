@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:movies/core/models/user_model.dart';
-import 'package:movies/core/resources/assets_manger.dart';
-import 'package:movies/core/resources/colors_manger.dart';
-import 'package:movies/features/Tabs/Profile/Widgets/Custom_Elevated_Button.dart';
-import 'package:movies/features/Tabs/Profile/Widgets/Custom_Info_Preview.dart';
+import 'package:recipes/core/models/user_model.dart';
+import 'package:recipes/core/resources/assets_manger.dart';
+import 'package:recipes/core/resources/colors_manger.dart';
+import 'package:recipes/features/Tabs/Profile/Widgets/Custom_Elevated_Button.dart';
+import 'package:recipes/features/Tabs/Profile/Widgets/Custom_Info_Preview.dart';
 
 class UpdateProfile extends StatelessWidget {
    UpdateProfile({super.key});

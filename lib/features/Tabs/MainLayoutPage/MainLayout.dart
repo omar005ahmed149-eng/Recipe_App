@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:movies/core/resources/colors_manger.dart';
-import 'package:movies/features/Tabs/MainLayoutPage/Widgets/Customized_BottomNavigationBar.dart';
+import 'package:recipes/core/resources/colors_manger.dart';
+import 'package:recipes/features/Tabs/MainLayoutPage/Widgets/Customized_BottomNavigationBar.dart';
 
 class Mainlayout extends StatefulWidget {
   const Mainlayout({super.key});

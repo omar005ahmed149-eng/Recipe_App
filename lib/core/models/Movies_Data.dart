@@ -1,100 +1,98 @@
-import 'dart:ui';
+import 'package:recipes/core/resources/assets_manger.dart';
 
-import 'package:movies/core/resources/assets_manger.dart';
+import 'recipe_Model.dart';
+class ReciepeData{
 
-import 'Movie_Model.dart';
-class MovieData{
-
-static final List<MovieModel> featuredMovies = [
-  MovieModel(
+static final List<ReciepeModel> featuredReciepes = [
+  ReciepeModel(
     title: '1917',
     rating: "7.7",
     poster_image:AssetsManger.Poster_1917,
 
   ),
-  MovieModel(
+  ReciepeModel(
     title: 'Baby Driver',
     rating: "7.6",
     poster_image:AssetsManger.Baby_Driver,
   ),
-  MovieModel(
+  ReciepeModel(
     title: 'Captain America',
     rating: "7.7",
     poster_image:AssetsManger.Captain_America,
   ),
-  MovieModel(
+  ReciepeModel(
     title: 'The Dark Knight',
     rating:"9.0",
     poster_image: AssetsManger.Dark_Knight,
   ),
-  MovieModel(
+  ReciepeModel(
     title: 'Black Widow',
     rating: "7.7",
     poster_image:AssetsManger.Black_Widow,
   ),
-  MovieModel(
+  ReciepeModel(
     title: 'Joker',
     rating: "8.1",
     poster_image: AssetsManger.joker,
   ),
-MovieModel(
+ReciepeModel(
     title: 'Iron Man 3',
     rating: "6.9",
   poster_image: AssetsManger.iron_man3,
   ),
-MovieModel(
+ReciepeModel(
     title: 'Avengers',
     rating: "7.0",
     poster_image: AssetsManger.avengers,
   ),
-  MovieModel(
+  ReciepeModel(
     title: 'Doctor Strange',
     rating: "7.5",
     poster_image:AssetsManger.dr_strange,
   ),
-  MovieModel(
+  ReciepeModel(
     title: 'Wednesday',
     rating: "8.0",
     poster_image: AssetsManger.wednesday,
   ),
-  MovieModel(
+  ReciepeModel(
     title: 'Doctor Who',
     rating: "8.2",
     poster_image: AssetsManger.doctor_who,
   ),
-  MovieModel(
+  ReciepeModel(
     title: 'Godzilla',
     rating: "7.3",
     poster_image: AssetsManger.godzilla,
   ),
 ];
 
- static final Map<String, List<MovieModel>> categories = {
+ static final Map<String, List<ReciepeModel>> categories = {
   'Action': [
-    featuredMovies[1],
-    featuredMovies[2],
-    featuredMovies[3],
-    featuredMovies[4],
-    featuredMovies[7],
-    featuredMovies[8],
-    featuredMovies[9],
-    featuredMovies[11],
+    featuredReciepes[1],
+    featuredReciepes[2],
+    featuredReciepes[3],
+    featuredReciepes[4],
+    featuredReciepes[7],
+    featuredReciepes[8],
+    featuredReciepes[9],
+    featuredReciepes[11],
   ],
   'Drama': [
-    featuredMovies[0],
-    featuredMovies[1],
-    featuredMovies[3],
-    featuredMovies[4],
-    featuredMovies[6],
-    featuredMovies[9],
+    featuredReciepes[0],
+    featuredReciepes[1],
+    featuredReciepes[3],
+    featuredReciepes[4],
+    featuredReciepes[6],
+    featuredReciepes[9],
   ],
   'Sci-Fi': [
-    featuredMovies[0],
-    featuredMovies[2],
-    featuredMovies[3],
-    featuredMovies[4],
-    featuredMovies[10],
-    featuredMovies[11],
+    featuredReciepes[0],
+    featuredReciepes[2],
+    featuredReciepes[3],
+    featuredReciepes[4],
+    featuredReciepes[10],
+    featuredReciepes[11],
   ],
    'Animation':[],
    'Biography':[],

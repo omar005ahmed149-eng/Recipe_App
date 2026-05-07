@@ -1,4 +1,4 @@
-package com.example.movies_appp
+package com.example.recipes_appp
 
 import io.flutter.embedding.android.FlutterActivity
 

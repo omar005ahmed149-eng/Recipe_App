@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:movies/core/resources/colors_manger.dart';
-import 'package:movies/features/Tabs/Profile/Widgets/top_section.dart';
-import 'package:movies/features/Tabs/Profile/Widgets/Bottom_Section.dart';
+import 'package:recipes/core/resources/colors_manger.dart';
+import 'package:recipes/features/Tabs/Profile/Widgets/top_section.dart';
+import 'package:recipes/features/Tabs/Profile/Widgets/Bottom_Section.dart';
 
 class Profiletab extends StatefulWidget {
   const Profiletab({super.key});

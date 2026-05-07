@@ -3,10 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../../../core/resources/assets_manger.dart';
 import '../../../../core/resources/colors_manger.dart';
-import '../../Browse/BrowseTab.dart';
 import '../../Home/HomeTab.dart';
 import '../../Profile/ProfileTab.dart';
-import '../../Search/SearchTab.dart';
 
 class CustomizedBottomnavigationbar extends StatefulWidget {
   const CustomizedBottomnavigationbar({super.key});
@@ -16,18 +14,21 @@ class CustomizedBottomnavigationbar extends StatefulWidget {
 }
 
 class _CustomizedBottomnavigationbarState extends State<CustomizedBottomnavigationbar> {
-  int selectedindex=0;
+  int selectedindex = 0;
+
+  final List<Widget> tabs = const [
+    Hometab(),
+    Profiletab(),
+  ];
+
   @override
   Widget build(BuildContext context) {
-    List<Widget> tabs=[
-      Hometab(),
-      Searchtab(),
-      Browsetab(),
-      Profiletab()
-    ];
     return Stack(
       children: [
-        tabs[selectedindex],
+        IndexedStack(
+          index: selectedindex,
+          children: tabs,
+        ),
         Padding(
           padding: EdgeInsets.all(12.sp),
           child: Column(
@@ -43,9 +44,7 @@ class _CustomizedBottomnavigationbarState extends State<CustomizedBottomnavigati
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     _Activation(0, IconsManager.home),
-                    _Activation(1, IconsManager.search),
-                    _Activation(2, IconsManager.browse),
-                    _Activation(3, IconsManager.profile),
+                    _Activation(1, IconsManager.profile),
                   ],
                 ),
               ),
@@ -61,9 +60,8 @@ class _CustomizedBottomnavigationbarState extends State<CustomizedBottomnavigati
 
     return GestureDetector(
       onTap: () {
-        selectedindex = index;
-        setState(() {
-        });
+        if (selectedindex == index) return;
+        setState(() => selectedindex = index);
       },
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 20.h, vertical: 8.w),

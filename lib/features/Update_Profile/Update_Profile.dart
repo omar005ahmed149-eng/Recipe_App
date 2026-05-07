@@ -5,13 +5,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:movies/core/bloc/auth/auth_cubit.dart';
-import 'package:movies/core/bloc/movies/movies_cubit.dart';
-import 'package:movies/core/bloc/movies/movies_state.dart';
-import 'package:movies/core/models/user_model.dart';
-import 'package:movies/core/resources/assets_manger.dart';
-import 'package:movies/core/resources/colors_manger.dart';
-import 'package:movies/core/resources/route_manger.dart';
+import 'package:recipes/core/bloc/auth/auth_cubit.dart';
+
+import 'package:recipes/core/resources/assets_manger.dart';
+import 'package:recipes/core/resources/colors_manger.dart';
+import 'package:recipes/core/resources/route_manger.dart';
+
+import '../../core/bloc/reciepes/reciepes_cubit.dart';
+import '../../core/bloc/reciepes/reciepes_state.dart';
 
 class UpdateProfile extends StatefulWidget {
   const UpdateProfile({super.key});
@@ -51,7 +52,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
     _nameCtrl = TextEditingController(text: _initialName);
     _phoneCtrl = TextEditingController(text: _initialPhone);
 
-    final appPoster = context.read<MoviesCubit>().state.selectedPoster;
+    final appPoster = context.read<ReciepesCubit>().state.selectedPoster;
     final userPoster = user?.poster ?? '';
     if (_avatars.contains(appPoster)) {
       _selectedPoster = appPoster;
@@ -95,7 +96,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
         currentUser.poster = _selectedPoster;
 
         await FirebaseFirestore.instance
-            .collection('Users')
+            .collection('users')
             .doc(currentUser.id)
             .update({
           'name': name,
@@ -105,7 +106,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
         context.read<AuthCubit>().updateCurrentUser(currentUser);
       }
 
-      context.read<MoviesCubit>().setPoster(_selectedPoster);
+      context.read<ReciepesCubit>().setPoster(_selectedPoster);
 
       _showSnack('Profile updated!');
       if (mounted) Navigator.pop(context);
@@ -159,14 +160,14 @@ class _UpdateProfileState extends State<UpdateProfile> {
 
       if (uid != null) {
         await FirebaseFirestore.instance
-            .collection('Users')
+            .collection('users')
             .doc(uid)
             .delete();
 
         await user!.delete();
       }
 
-      context.read<MoviesCubit>().clearAll();
+      context.read<ReciepesCubit>().clearAll();
       await context.read<AuthCubit>().logout();
 
       if (mounted) {
@@ -228,7 +229,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                     children: [
                       SizedBox(height: 24.h),
 
-            BlocBuilder<MoviesCubit, MoviesState>(
+            BlocBuilder<ReciepesCubit, ReciepesState>(
               builder: (context, _) {
 
                 return Center(

@@ -1,11 +1,11 @@
-# 🎬 Movies App
+# 🎬 recipes App
 
-A Flutter-based movie browsing application that allows users to explore trending and top-rated movies using a live RESTful API.
+A Flutter-based recipe browsing application that allows users to explore trending and top-rated recipes using a live RESTful API.
 
 ## ✨ Features
-- 🔥 Browse trending, popular, and top-rated movies
-- 🔍 Search for movies
-- 🎬 View detailed movie information
+- 🔥 Browse trending, popular, and top-rated recipes
+- 🔍 Search for recipes
+- 🎬 View detailed recipe information
 - ⚡ Smooth loading and error handling
 - 📱 Responsive and modern UI
 

@@ -1,55 +1,57 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movies/core/bloc/movies/movies_cubit.dart';
-import 'package:movies/core/bloc/movies/movies_state.dart';
-import 'package:movies/core/models/Movie_Model.dart';
-import 'package:movies/core/resources/colors_manger.dart';
 
-class MovieDetailsScreen extends StatefulWidget {
-  final MovieModel movie;
-  const MovieDetailsScreen({super.key, required this.movie});
+import 'package:recipes/core/models/recipe_Model.dart';
+import 'package:recipes/core/resources/colors_manger.dart';
+
+import '../../core/bloc/reciepes/reciepes_cubit.dart';
+import '../../core/bloc/reciepes/reciepes_state.dart';
+
+class recipeDetailsScreen extends StatefulWidget {
+  final ReciepeModel recipe;
+  const recipeDetailsScreen({super.key, required this.recipe});
 
   @override
-  State<MovieDetailsScreen> createState() => _MovieDetailsScreenState();
+  State<recipeDetailsScreen> createState() => _recipeDetailsScreenState();
 }
 
-class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
-  static const Map<String, _MovieMeta> _meta = {
-    '1917': _MovieMeta(year: '2019', likes: 18, duration: 119, rating: 8.3,
+class _recipeDetailsScreenState extends State<recipeDetailsScreen> {
+  static const Map<String, _recipeMeta> _meta = {
+    '1917': _recipeMeta(year: '2019', likes: 18, duration: 119, rating: 8.3,
         summary:
             'April 6th, 1917. As a regiment assembles to wage war deep in enemy territory, two young British soldiers are chosen to deliver a message that could potentially save 1,600 of their comrades — and the brothers of one of the soldiers.'),
-    'Baby Driver': _MovieMeta(year: '2017', likes: 21, duration: 113, rating: 7.6,
+    'Baby Driver': _recipeMeta(year: '2017', likes: 21, duration: 113, rating: 7.6,
         summary:
             'After being coerced into working for a crime boss, a young getaway driver finds himself taking part in a heist doomed to fail.'),
-    'Captain America': _MovieMeta(year: '2011', likes: 15, duration: 124, rating: 6.9,
+    'Captain America': _recipeMeta(year: '2011', likes: 15, duration: 124, rating: 6.9,
         summary:
             'Steve Rogers, a rejected military soldier, transforms into Captain America after taking a dose of a Super-Soldier serum. But being Captain America comes at a price as he attempts to take down a war monger.'),
-    'The Dark Knight': _MovieMeta(year: '2008', likes: 45, duration: 152, rating: 9.0,
+    'The Dark Knight': _recipeMeta(year: '2008', likes: 45, duration: 152, rating: 9.0,
         summary:
             'When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.'),
-    'Black Widow': _MovieMeta(year: '2021', likes: 14, duration: 134, rating: 6.7,
+    'Black Widow': _recipeMeta(year: '2021', likes: 14, duration: 134, rating: 6.7,
         summary:
             'Natasha Romanoff confronts the darker parts of her ledger when a dangerous conspiracy with ties to her past arises. Pursued by a force that will stop at nothing to bring her down, Natasha must deal with her history as a spy.'),
-    'Joker': _MovieMeta(year: '2019', likes: 38, duration: 122, rating: 8.4,
+    'Joker': _recipeMeta(year: '2019', likes: 38, duration: 122, rating: 8.4,
         summary:
             'In Gotham City, mentally-troubled comedian Arthur Fleck embarks on a downward-spiral of social revolution and bloody crime. This path brings him face-to-face with his alter-ego: "The Joker".'),
-    'Iron Man 3': _MovieMeta(year: '2013', likes: 12, duration: 130, rating: 7.1,
+    'Iron Man 3': _recipeMeta(year: '2013', likes: 12, duration: 130, rating: 7.1,
         summary:
             'When Tony Stark\'s world is torn apart by a formidable terrorist called the Mandarin, he starts an odyssey of rebuilding and retribution.'),
-    'Avengers': _MovieMeta(year: '2012', likes: 29, duration: 143, rating: 8.0,
+    'Avengers': _recipeMeta(year: '2012', likes: 29, duration: 143, rating: 8.0,
         summary:
             'Nick Fury of S.H.I.E.L.D. assembles a team of superheroes to save the planet from Loki and his army.'),
-    'Doctor Strange': _MovieMeta(year: '2016', likes: 16, duration: 115, rating: 7.5,
+    'Doctor Strange': _recipeMeta(year: '2016', likes: 16, duration: 115, rating: 7.5,
         summary:
             'While on a journey of physical and spiritual healing, a brilliant neurosurgeon is drawn into the world of the mystic arts.'),
-    'Wednesday': _MovieMeta(year: '2022', likes: 33, duration: 45, rating: 8.1,
+    'Wednesday': _recipeMeta(year: '2022', likes: 33, duration: 45, rating: 8.1,
         summary:
             'Follows Wednesday Addams\' years as a student at Nevermore Academy, where she attempts to master her emerging psychic ability, thwart a monstrous killing spree that has terrorized the local town, and solve the supernatural mystery that embroiled her parents.'),
-    'Doctor Who': _MovieMeta(year: '2013', likes: 27, duration: 60, rating: 9.1,
+    'Doctor Who': _recipeMeta(year: '2013', likes: 27, duration: 60, rating: 9.1,
         summary:
             'The Doctor\'s many incarnations team up to save Gallifrey from total destruction in The Day of the Doctor, the 50th anniversary special.'),
-    'Godzilla': _MovieMeta(year: '2014', likes: 19, duration: 123, rating: 6.4,
+    'Godzilla': _recipeMeta(year: '2014', likes: 19, duration: 123, rating: 6.4,
         summary:
             'The world is beset by the appearance of monstrous creatures, but one of them may be the only one who can prevent an extinction-level event.'),
   };
@@ -65,23 +67,23 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<MoviesCubit>().addToHistory(widget.movie);
+      context.read<ReciepesCubit>().addToHistory(widget.recipe);
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final meta = _meta[widget.movie.title] ??
-        _MovieMeta(
+    final meta = _meta[widget.recipe.title] ??
+        _recipeMeta(
             year: '2020',
             likes: 10,
             duration: 100,
-            rating: double.parse(widget.movie.rating),
-            summary: 'An exciting movie you will love watching.');
+            rating: double.parse(widget.recipe.rating),
+            summary: 'An exciting recipe you will love watching.');
 
-    return BlocBuilder<MoviesCubit, MoviesState>(
+    return BlocBuilder<ReciepesCubit, ReciepesState>(
       builder: (context, state) {
-        final isBookmarked = context.read<MoviesCubit>().isBookmarked(widget.movie);
+        final isBookmarked = context.read<ReciepesCubit>().isBookmarked(widget.recipe);
         return Scaffold(
           backgroundColor: ColorsManger.black,
           body: CustomScrollView(
@@ -102,13 +104,13 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                       size: 28,
                     ),
                     onPressed: () {
-                      context.read<MoviesCubit>().toggleBookmark(widget.movie);
+                      context.read<ReciepesCubit>().toggleBookmark(widget.recipe);
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           backgroundColor: ColorsManger.darkGray,
                           duration: const Duration(seconds: 1),
                           content: Text(
-                            context.read<MoviesCubit>().isBookmarked(widget.movie)
+                            context.read<ReciepesCubit>().isBookmarked(widget.recipe)
                                 ? '✓ Added to Watch List'
                                 : 'Removed from Watch List',
                             style: const TextStyle(color: Colors.white),
@@ -123,7 +125,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                     fit: StackFit.expand,
                     children: [
                       Image.asset(
-                        widget.movie.poster_image,
+                        widget.recipe.poster_image,
                         fit: BoxFit.cover,
                       ),
                       Container(
@@ -174,7 +176,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                       SizedBox(height: 12.h),
 
                       Text(
-                        widget.movie.title,
+                        widget.recipe.title,
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 22.sp,
@@ -245,7 +247,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
 
                       _SectionTitle(title: 'Similar'),
                       SizedBox(height: 12.h),
-                      _SimilarMoviesGrid(currentMovie: widget.movie),
+                      _SimilarrecipesGrid(currentrecipe: widget.recipe),
 
                       SizedBox(height: 24.h),
 
@@ -347,14 +349,14 @@ class _SectionTitle extends StatelessWidget {
   }
 }
 
-class _SimilarMoviesGrid extends StatelessWidget {
-  final MovieModel currentMovie;
-  const _SimilarMoviesGrid({required this.currentMovie});
+class _SimilarrecipesGrid extends StatelessWidget {
+  final ReciepeModel currentrecipe;
+  const _SimilarrecipesGrid({required this.currentrecipe});
 
   @override
   Widget build(BuildContext context) {
-    final allMovies = _similarPool
-        .where((m) => m['title'] != currentMovie.title)
+    final allrecipes = _similarPool
+        .where((m) => m['title'] != currentrecipe.title)
         .take(4)
         .toList();
 
@@ -367,9 +369,9 @@ class _SimilarMoviesGrid extends StatelessWidget {
         crossAxisSpacing: 10.w,
         mainAxisSpacing: 10.h,
       ),
-      itemCount: allMovies.length,
+      itemCount: allrecipes.length,
       itemBuilder: (_, i) {
-        final m = allMovies[i];
+        final m = allrecipes[i];
         return ClipRRect(
           borderRadius: BorderRadius.circular(12.r),
           child: Stack(
@@ -418,13 +420,13 @@ class _SimilarMoviesGrid extends StatelessWidget {
 }
 
 
-class _MovieMeta {
+class _recipeMeta {
   final String year;
   final int likes;
   final int duration;
   final double rating;
   final String summary;
-  const _MovieMeta({
+  const _recipeMeta({
     required this.year,
     required this.likes,
     required this.duration,

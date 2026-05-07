@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movies/core/resources/colors_manger.dart';
-import 'package:movies/core/resources/text_style.dart';
-import 'package:movies/features/auth/widgets/custom_textButton.dart';
+import 'package:recipes/core/resources/colors_manger.dart';
+import 'package:recipes/core/resources/text_style.dart';
+import 'package:recipes/features/auth/widgets/custom_textButton.dart';
 
 class CustomNavigatorButton extends StatelessWidget {
   const CustomNavigatorButton({

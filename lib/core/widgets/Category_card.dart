@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:movies/core/models/Movie_Model.dart';
-import 'package:movies/features/movie_details/movie_details_screen.dart';
+import 'package:recipes/core/models/recipe_Model.dart';
+import 'package:recipes/features/recipe_details/recipe_details_screen.dart';
 import '../../features/Tabs/Home/Widgets/Rating_Badge.dart';
 
 class CategoryCard extends StatefulWidget {
@@ -8,11 +8,11 @@ class CategoryCard extends StatefulWidget {
     super.key,
     required this.rating,
     required this.poster_image,
-    this.movie,
+    this.recipe,
   });
   final String rating;
   final String poster_image;
-  final MovieModel? movie;
+  final ReciepeModel? recipe;
 
   @override
   State<CategoryCard> createState() => _CategoryCardState();
@@ -25,11 +25,11 @@ class _CategoryCardState extends State<CategoryCard> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        if (widget.movie != null) {
+        if (widget.recipe != null) {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (_) => MovieDetailsScreen(movie: widget.movie!),
+              builder: (_) => recipeDetailsScreen(recipe: widget.recipe!),
             ),
           );
         }

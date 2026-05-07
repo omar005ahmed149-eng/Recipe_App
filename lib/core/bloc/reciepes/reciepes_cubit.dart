@@ -2,36 +2,37 @@ import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
-import 'package:movies/core/bloc/movies/movies_state.dart';
-import 'package:movies/core/models/Movie_Model.dart';
-import 'package:movies/core/models/Movies_Data.dart';
+import 'package:recipes/core/bloc/reciepes/reciepes_state.dart';
+import 'package:recipes/core/models/recipe_Model.dart';
 
-class MoviesCubit extends Cubit<MoviesState> {
-  MoviesCubit() : super(const MoviesState());
+import '../../models/recipes_Data.dart';
+
+class ReciepesCubit extends Cubit<ReciepesState> {
+  ReciepesCubit() : super(const ReciepesState());
 
   void setPoster(String path) {
     emit(state.copyWith(selectedPoster: path));
   }
 
-  bool isBookmarked(MovieModel movie) =>
-      state.watchList.any((m) => m.title == movie.title);
+  bool isBookmarked(ReciepeModel reciepe) =>
+      state.watchList.any((m) => m.title == reciepe.title);
 
-  void toggleBookmark(MovieModel movie) {
+  void toggleBookmark(ReciepeModel reciepe) {
     final updated = [...state.watchList];
-    final index = updated.indexWhere((m) => m.title == movie.title);
+    final index = updated.indexWhere((m) => m.title == reciepe.title);
     if (index >= 0) {
       updated.removeAt(index);
     } else {
-      updated.add(movie);
+      updated.add(reciepe);
     }
     emit(state.copyWith(watchList: updated));
     _saveToFirestore();
   }
 
-  void addToHistory(MovieModel movie) {
+  void addToHistory(ReciepeModel reciepe) {
     final updated = [...state.history];
-    updated.removeWhere((m) => m.title == movie.title);
-    updated.insert(0, movie);
+    updated.removeWhere((m) => m.title == reciepe.title);
+    updated.insert(0, reciepe);
     emit(state.copyWith(history: updated));
     _saveToFirestore();
   }
@@ -41,28 +42,28 @@ class MoviesCubit extends Cubit<MoviesState> {
     if (uid == null) return;
     try {
       final doc =
-          await FirebaseFirestore.instance.collection('Users').doc(uid).get();
+          await FirebaseFirestore.instance.collection('users').doc(uid).get();
       final data = doc.data();
       if (data == null) return;
 
       final rawHistory = List<dynamic>.from(data['history'] ?? []);
       final rawWatchList = List<dynamic>.from(data['watchList'] ?? []);
 
-      final history = <MovieModel>[];
+      final history = <ReciepeModel>[];
       for (final item in rawHistory) {
-        final movie = _movieFromStored(item);
-        if (movie != null) history.add(movie);
+        final reciepe = _reciepeFromStored(item);
+        if (reciepe != null) history.add(reciepe);
       }
 
-      final watchList = <MovieModel>[];
+      final watchList = <ReciepeModel>[];
       for (final item in rawWatchList) {
-        final movie = _movieFromStored(item);
-        if (movie != null) watchList.add(movie);
+        final reciepe = _reciepeFromStored(item);
+        if (reciepe != null) watchList.add(reciepe);
       }
 
       emit(state.copyWith(history: history, watchList: watchList));
     } catch (e) {
-      debugPrint('MoviesCubit.loadFromFirestore error: $e');
+      debugPrint('ReciepesCubit.loadFromFirestore error: $e');
     }
   }
 
@@ -70,46 +71,46 @@ class MoviesCubit extends Cubit<MoviesState> {
     final uid = FirebaseAuth.instance.currentUser?.uid;
     if (uid == null) return;
     try {
-      await FirebaseFirestore.instance.collection('Users').doc(uid).update({
-        'history': state.history.map(_movieToMap).toList(),
-        'watchList': state.watchList.map(_movieToMap).toList(),
+      await FirebaseFirestore.instance.collection('users').doc(uid).update({
+        'history': state.history.map(_reciepeToMap).toList(),
+        'watchList': state.watchList.map(_reciepeToMap).toList(),
       });
     } catch (e) {
-      debugPrint('MoviesCubit._saveToFirestore error: $e');
+      debugPrint('ReciepesCubit._saveToFirestore error: $e');
     }
   }
 
   void clearAll() {
-    emit(const MoviesState());
+    emit(const ReciepesState());
   }
 
-  Map<String, dynamic> _movieToMap(MovieModel movie) {
+  Map<String, dynamic> _reciepeToMap(ReciepeModel reciepe) {
     return {
-      'title': movie.title,
-      'rating': movie.rating,
-      'poster_image': movie.poster_image,
+      'title': reciepe.title,
+      'rating': reciepe.rating,
+      'poster_image': reciepe.poster_image,
     };
   }
 
-  MovieModel? _movieFromStored(dynamic item) {
+  ReciepeModel? _reciepeFromStored(dynamic item) {
     if (item is Map<String, dynamic>) {
       final title = (item['title'] ?? '').toString();
       final rating = (item['rating'] ?? '').toString();
       final poster = (item['poster_image'] ?? '').toString();
       if (title.isNotEmpty && rating.isNotEmpty && poster.isNotEmpty) {
-        return MovieModel(title: title, rating: rating, poster_image: poster);
+        return ReciepeModel(title: title, rating: rating, poster_image: poster);
       }
       return null;
     }
     if (item is String) {
-      return _findMovie(item);
+      return _findReciepe(item);
     }
     return null;
   }
 
-  MovieModel? _findMovie(String title) {
+  ReciepeModel? _findReciepe(String title) {
     try {
-      return MovieData.featuredMovies.firstWhere((m) => m.title == title);
+      return ReciepeData.featuredReciepes.firstWhere((m) => m.title == title);
     } catch (_) {
       return null;
     }

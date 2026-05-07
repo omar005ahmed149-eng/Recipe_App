@@ -1,14 +1,12 @@
 import 'package:flutter/cupertino.dart';
-import 'package:movies/core/models/Movie_Model.dart';
-import 'package:movies/features/Tabs/Browse/BrowseTab.dart';
-import 'package:movies/features/Tabs/Home/HomeTab.dart';
-import 'package:movies/features/Tabs/Profile/ProfileTab.dart';
-import 'package:movies/features/Tabs/Search/SearchTab.dart';
-import 'package:movies/features/auth/forget_pass/forget_pass_screen.dart';
-import 'package:movies/features/auth/register/registerScreen.dart';
-import 'package:movies/features/auth/login/login_screen.dart';
-import 'package:movies/features/movie_details/movie_details_screen.dart';
-import 'package:movies/features/onboarding/onboarding_screen.dart';
+import 'package:recipes/core/models/recipe_Model.dart';
+import 'package:recipes/features/Tabs/Home/HomeTab.dart';
+import 'package:recipes/features/Tabs/Profile/ProfileTab.dart';
+import 'package:recipes/features/auth/forget_pass/forget_pass_screen.dart';
+import 'package:recipes/features/auth/register/registerScreen.dart';
+import 'package:recipes/features/auth/login/login_screen.dart';
+import 'package:recipes/features/onboarding/onboarding_screen.dart';
+import 'package:recipes/features/recipe_details/recipe_details_screen.dart';
 import '../../features/Tabs/MainLayoutPage/MainLayout.dart';
 import '../../features/Update_Profile/Update_Profile.dart';
 
@@ -23,7 +21,7 @@ abstract class RoutesManger {
   static const String browse = '/browse';
   static const String profile = '/profile';
   static const String onBoarding = '/onBoarding';
-  static const String movieDetails = '/movieDetails';
+  static const String recipeDetails = '/recipeDetails';
 
   static Route? generateRoutes(RouteSettings settings) {
     switch (settings.name) {
@@ -37,20 +35,16 @@ abstract class RoutesManger {
         return CupertinoPageRoute(builder: (_) => const UpdateProfile());
       case mainlayout:
         return CupertinoPageRoute(builder: (_) => Mainlayout());
+      case onBoarding:
+        return CupertinoPageRoute(builder: (_) => const OnBoardingScreen());
       case homescreen:
         return CupertinoPageRoute(builder: (_) => Hometab());
-      case search:
-        return CupertinoPageRoute(builder: (_) => Searchtab());
-      case browse:
-        return CupertinoPageRoute(builder: (_) => Browsetab());
       case profile:
         return CupertinoPageRoute(builder: (_) => const Profiletab());
-      case onBoarding:
-        return CupertinoPageRoute(builder: (_) => OnBoardingScreen());
-      case movieDetails:
-        final movie = settings.arguments as MovieModel;
+      case recipeDetails:
+        final recipe = settings.arguments as ReciepeModel;
         return CupertinoPageRoute(
-            builder: (_) => MovieDetailsScreen(movie: movie));
+            builder: (_) => recipeDetailsScreen(recipe: recipe));
       default:
         return null;
     }

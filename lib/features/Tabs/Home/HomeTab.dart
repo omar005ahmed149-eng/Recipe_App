@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movies/core/resources/assets_manger.dart';
-import 'package:movies/core/resources/colors_manger.dart';
-import 'package:movies/core/models/Movies_Data.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:recipes/core/resources/assets_manger.dart';
+import 'package:recipes/core/resources/colors_manger.dart';
+import 'package:recipes/core/models/recipes_Data.dart';
 
 import 'bloc/home_bloc.dart';
 import 'Widgets/Bottom_Section.dart';
-import '../../../core/models/Movie_Model.dart';
 import 'Widgets/Top_section.dart';
 import 'Widgets/Blurred_Background.dart';
 
@@ -32,13 +32,13 @@ class _HomeTabView extends StatefulWidget {
 class _HomeTabViewState extends State<_HomeTabView> with SingleTickerProviderStateMixin{
   late final AnimationController animController;
   late final Animation<double> fadeAnimation;
-  String prevUrl = MovieData.featuredMovies[0].poster_image;
+  String prevUrl = ReciepeData.featuredReciepes[0].poster_image;
   List<Widget> _buildCategorySliders() {
-    return MovieData.categories.entries.map((entry) {
+    return ReciepeData.categories.entries.map((entry) {
       return SliverToBoxAdapter(
         child: BottomSection(
           label: entry.key,
-          movies: entry.value,
+          recipes: entry.value,
         ),
       );
     }).toList();
@@ -107,7 +107,9 @@ class _HomeTabViewState extends State<_HomeTabView> with SingleTickerProviderSta
                     child: TopSection(activeIndex: state.activeIndex),
                   ),
                   SliverToBoxAdapter(
-                    child: Image.asset(AssetsManger.available),
+                    child: Padding(
+                        padding:EdgeInsetsGeometry.all(20.r) ,
+                        child: Image.asset(AssetsManger.cook)),
                   ),
                   ..._buildCategorySliders(),
                   const SliverToBoxAdapter(child: SizedBox(height: 40)),

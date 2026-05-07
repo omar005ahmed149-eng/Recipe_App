@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:movies/core/models/user_model.dart';
+import 'package:recipes/core/models/user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class FirebaseService {
@@ -58,7 +58,7 @@ class FirebaseService {
 
   static CollectionReference<UserModel> getUsersCollection() {
     FirebaseFirestore db = FirebaseFirestore.instance;
-    return db.collection("Users").withConverter<UserModel>(
+    return db.collection("users").withConverter<UserModel>(
       fromFirestore: (snapshot, _) =>
           UserModel.fromjson(snapshot.data()!, snapshot.id),
       toFirestore: (user, _) => user.tojson(),

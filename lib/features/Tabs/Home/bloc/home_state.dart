@@ -5,7 +5,7 @@ class HomeState {
   final String currentBg;
 
   String get currentBackgroundUrl =>
-      MovieData.featuredMovies[activeIndex].poster_image;
+      ReciepeData.featuredReciepes[activeIndex].poster_image;
 
   const HomeState({
     required this.activeIndex,
@@ -14,7 +14,7 @@ class HomeState {
 
   factory HomeState.initial() => HomeState(
         activeIndex: 0,
-        currentBg:  MovieData.featuredMovies[0].poster_image,
+        currentBg:  ReciepeData.featuredReciepes[0].poster_image,
       );
 
   HomeState copyWith({

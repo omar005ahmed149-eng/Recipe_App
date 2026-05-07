@@ -2,19 +2,19 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movies/core/bloc/auth/auth_cubit.dart';
-import 'package:movies/core/resources/assets_manger.dart';
-import 'package:movies/core/resources/colors_manger.dart';
-import 'package:movies/core/resources/text_style.dart';
-import 'package:movies/core/resources/route_manger.dart';
-import 'package:movies/core/utils/ui_utils.dart';
-import 'package:movies/core/widgets/custom_button.dart';
-import 'package:movies/core/widgets/custom_text_form_field.dart';
-import 'package:movies/core/widgets/validators.dart';
-import 'package:movies/features/auth/widgets/custom_divider.dart';
-import 'package:movies/features/auth/widgets/custom_navigator_button.dart';
-import 'package:movies/features/auth/widgets/custom_textButton.dart';
-import 'package:movies/features/auth/widgets/switch_toggle.dart';
+import 'package:recipes/core/bloc/auth/auth_cubit.dart';
+import 'package:recipes/core/resources/assets_manger.dart';
+import 'package:recipes/core/resources/colors_manger.dart';
+import 'package:recipes/core/resources/text_style.dart';
+import 'package:recipes/core/resources/route_manger.dart';
+import 'package:recipes/core/utils/ui_utils.dart';
+import 'package:recipes/core/widgets/custom_button.dart';
+import 'package:recipes/core/widgets/custom_text_form_field.dart';
+import 'package:recipes/core/widgets/validators.dart';
+import 'package:recipes/features/auth/widgets/custom_divider.dart';
+import 'package:recipes/features/auth/widgets/custom_navigator_button.dart';
+import 'package:recipes/features/auth/widgets/custom_textButton.dart';
+import 'package:recipes/features/auth/widgets/switch_toggle.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -117,7 +117,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         AppTextStyles.buttonName(16.sp, ColorsManger.black),
                   ),
                   SizedBox(height: 34.h),
-                  SwitchToggle(),
                 ],
               ),
             ),

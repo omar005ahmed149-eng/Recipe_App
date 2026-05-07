@@ -1,14 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movies/core/resources/assets_manger.dart';
-import 'package:movies/core/resources/colors_manger.dart';
-import 'package:movies/core/resources/text_style.dart';
-import 'package:movies/core/utils/ui_utils.dart';
-import 'package:movies/core/widgets/custom_button.dart';
-import 'package:movies/core/widgets/custom_text_form_field.dart';
-import 'package:movies/core/widgets/validators.dart';
-import 'package:movies/firebase/firebase_services.dart';
+import 'package:recipes/core/resources/assets_manger.dart';
+import 'package:recipes/core/resources/colors_manger.dart';
+import 'package:recipes/core/resources/text_style.dart';
+import 'package:recipes/core/utils/ui_utils.dart';
+import 'package:recipes/core/widgets/custom_button.dart';
+import 'package:recipes/core/widgets/custom_text_form_field.dart';
+import 'package:recipes/core/widgets/validators.dart';
+import 'package:recipes/firebase/firebase_services.dart';
 
 class ForgetPassScreen extends StatefulWidget {
   const ForgetPassScreen({super.key});

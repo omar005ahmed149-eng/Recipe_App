@@ -1,22 +1,22 @@
-import 'package:movies/core/models/Movie_Model.dart';
+import 'package:recipes/core/models/recipe_Model.dart';
 
-class MoviesState {
+class ReciepesState {
   final String selectedPoster;
-  final List<MovieModel> watchList;
-  final List<MovieModel> history;
+  final List<ReciepeModel> watchList;
+  final List<ReciepeModel> history;
 
-  const MoviesState({
+  const ReciepesState({
     this.selectedPoster = '',
     this.watchList = const [],
     this.history = const [],
   });
 
-  MoviesState copyWith({
+  ReciepesState copyWith({
     String? selectedPoster,
-    List<MovieModel>? watchList,
-    List<MovieModel>? history,
+    List<ReciepeModel>? watchList,
+    List<ReciepeModel>? history,
   }) {
-    return MoviesState(
+    return ReciepesState(
       selectedPoster: selectedPoster ?? this.selectedPoster,
       watchList: watchList ?? this.watchList,
       history: history ?? this.history,

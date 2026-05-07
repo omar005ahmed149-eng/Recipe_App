@@ -2,40 +2,42 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movies/core/bloc/auth/auth_cubit.dart';
-import 'package:movies/core/bloc/auth/auth_state.dart';
-import 'package:movies/core/bloc/movies/movies_cubit.dart';
-import 'package:movies/core/theme/theme_manger.dart';
-import 'package:movies/core/resources/route_manger.dart';
+import 'package:recipes/core/bloc/auth/auth_cubit.dart';
+import 'package:recipes/core/bloc/auth/auth_state.dart';
+import 'package:recipes/core/theme/theme_manger.dart';
+import 'package:recipes/core/resources/route_manger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'core/bloc/reciepes/reciepes_cubit.dart';
+import 'firebase_options.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   final prefs = await SharedPreferences.getInstance();
-  final OnBoarding = prefs.getBool('seenOnBoarding') ?? false;
-  final moviesCubit = MoviesCubit();
-  final authCubit = AuthCubit(moviesCubit);
+  final onBoarding = prefs.getBool('seenOnBoarding') ?? false;
+  final recipesCubit = ReciepesCubit();
+  final authCubit = AuthCubit(recipesCubit);
   await authCubit.bootstrapSession();
 
-  runApp(MoviesApp(
-    seenOnboarding: OnBoarding,
+  runApp(Recipe_App(
+    seenOnboarding: onBoarding,
     hasValidSession: authCubit.state.status == AuthStatus.authenticated,
-    moviesCubit: moviesCubit,
+    recipesCubit: recipesCubit,
     authCubit: authCubit,
   ));
 }
 
-class MoviesApp extends StatelessWidget {
+class Recipe_App extends StatelessWidget {
   final bool seenOnboarding;
   final bool hasValidSession;
-  final MoviesCubit moviesCubit;
+  final ReciepesCubit recipesCubit;
   final AuthCubit authCubit;
-  const MoviesApp({
+  const Recipe_App({
     super.key,
     required this.seenOnboarding,
     required this.hasValidSession,
-    required this.moviesCubit,
+    required this.recipesCubit,
     required this.authCubit,
   });
 
@@ -43,7 +45,7 @@ class MoviesApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider.value(value: moviesCubit),
+        BlocProvider.value(value: recipesCubit),
         BlocProvider.value(value: authCubit),
       ],
       child: ScreenUtilInit(

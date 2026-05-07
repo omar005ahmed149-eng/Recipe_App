@@ -1,6 +1,7 @@
 abstract class AssetsManger {
   static const String _base = "assets/images/";
   static const String forgetPass = "${_base}forgot password.png";
+  static const String cook = "${_base}COOK NOW.png";
   static const String logo = "${_base}logo.png";
   static const String avatarOne = "${_base}gamer (1).png";
   static const String avatarTwo = "${_base}gamer (2).png";

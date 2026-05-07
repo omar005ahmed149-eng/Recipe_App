@@ -1,19 +1,20 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movies/core/bloc/auth/auth_cubit.dart';
-import 'package:movies/core/models/user_model.dart';
-import 'package:movies/core/resources/colors_manger.dart';
-import 'package:movies/core/resources/text_style.dart';
-import 'package:movies/core/resources/route_manger.dart';
-import 'package:movies/core/utils/ui_utils.dart';
-import 'package:movies/core/widgets/custom_button.dart';
-import 'package:movies/core/widgets/custom_text_form_field.dart';
-import 'package:movies/core/widgets/validators.dart';
-import 'package:movies/features/auth/widgets/custom_caroselslider.dart';
-import 'package:movies/features/auth/widgets/custom_navigator_button.dart';
-import 'package:movies/features/auth/widgets/switch_toggle.dart';
+import 'package:recipes/core/bloc/auth/auth_cubit.dart';
+import 'package:recipes/core/models/user_model.dart';
+import 'package:recipes/core/resources/colors_manger.dart';
+import 'package:recipes/core/resources/text_style.dart';
+import 'package:recipes/core/resources/route_manger.dart';
+import 'package:recipes/core/utils/ui_utils.dart';
+import 'package:recipes/core/widgets/custom_button.dart';
+import 'package:recipes/core/widgets/custom_text_form_field.dart';
+import 'package:recipes/core/widgets/validators.dart';
+import 'package:recipes/features/auth/widgets/custom_caroselslider.dart';
+import 'package:recipes/features/auth/widgets/custom_navigator_button.dart';
+import 'package:recipes/features/auth/widgets/switch_toggle.dart';
 
 class Registerscreen extends StatefulWidget {
   const Registerscreen({super.key});
@@ -179,8 +180,23 @@ class _RegisterscreenState extends State<Registerscreen> {
           fgColor: Colors.white,
         );
       }
-    }
-     catch (exception) {
+    } on FirebaseException catch (exception) {
+      UiUtils.hideDialog(context);
+      if (exception.code == 'permission-denied') {
+        UiUtils.showMessage(
+          message:
+              'Account created, but profile save was denied by Firestore rules. Check rules deployment and collection name.',
+          bgColor: Colors.red,
+          fgColor: Colors.white,
+        );
+      } else {
+        UiUtils.showMessage(
+          message: exception.message ?? exception.code,
+          bgColor: Colors.red,
+          fgColor: Colors.white,
+        );
+      }
+    } catch (exception) {
       UiUtils.hideDialog(context);
       UiUtils.showMessage(
         message: exception.toString(),

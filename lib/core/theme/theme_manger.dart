@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movies/core/resources/colors_manger.dart';
-import 'package:movies/core/resources/text_style.dart';
+import 'package:recipes/core/resources/colors_manger.dart';
+import 'package:recipes/core/resources/text_style.dart';
 
 class ThemeManger {
   ThemeData darkTheme = ThemeData(

@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/MoviesApp.iml" filepath="$PROJECT_DIR$/.idea/MoviesApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/movies_appp.iml" filepath="$PROJECT_DIR$/movies_appp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/android/movies_appp_android.iml" filepath="$PROJECT_DIR$/android/movies_appp_android.iml" />
     </modules>
   </component>
 </project>

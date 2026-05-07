@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:movies/core/bloc/auth/auth_cubit.dart';
-import 'package:movies/core/bloc/movies/movies_cubit.dart';
-import 'package:movies/core/bloc/movies/movies_state.dart';
-import 'package:movies/core/resources/assets_manger.dart';
-import 'package:movies/core/resources/colors_manger.dart';
-import 'package:movies/core/resources/route_manger.dart';
-import 'package:movies/features/Tabs/Profile/Widgets/TabBar_Item.dart';
+import 'package:recipes/core/bloc/auth/auth_cubit.dart';
+
+import 'package:recipes/core/resources/assets_manger.dart';
+import 'package:recipes/core/resources/colors_manger.dart';
+import 'package:recipes/core/resources/route_manger.dart';
+import 'package:recipes/features/Tabs/Profile/Widgets/TabBar_Item.dart';
+import '../../../../core/bloc/reciepes/reciepes_cubit.dart';
+import '../../../../core/bloc/reciepes/reciepes_state.dart';
 import 'Stat_Item.dart';
 
 class TopSection extends StatefulWidget {
@@ -28,12 +29,12 @@ class _TopSectionState extends State<TopSection> {
   @override
   void initState() {
     super.initState();
-    context.read<MoviesCubit>().loadFromFirestore();
+    context.read<ReciepesCubit>().loadFromFirestore();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<MoviesCubit, MoviesState>(
+    return BlocBuilder<ReciepesCubit, ReciepesState>(
       builder: (context, state) {
         final user = context.read<AuthCubit>().state.user;
         final watchList = state.watchList;
@@ -78,7 +79,7 @@ class _TopSectionState extends State<TopSection> {
                         children: [
                           StatItem(
                             count: watchList.length.toString(),
-                            label: 'Wish List',
+                            label: 'Cook List',
                           ),
                           StatItem(
                             count: history.length.toString(),
@@ -97,7 +98,7 @@ class _TopSectionState extends State<TopSection> {
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  user?.name ?? 'User',
+                  capitalize(user!.name) ,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 25.sp,
@@ -184,7 +185,7 @@ class _TopSectionState extends State<TopSection> {
                 children: [
                   TabBarItem(
                     icon: Icons.list,
-                    label: 'Watch List',
+                    label: 'Cook List',
                     isSelected: widget.selectedTab == 0,
                     onTap: () => widget.onTabChanged(0),
                   ),
@@ -223,7 +224,7 @@ class _TopSectionState extends State<TopSection> {
           TextButton(
             onPressed: () async {
               Navigator.pop(ctx);
-              context.read<MoviesCubit>().clearAll();
+              context.read<ReciepesCubit>().clearAll();
               await context.read<AuthCubit>().logout();
               Navigator.pushNamedAndRemoveUntil(
                   context, RoutesManger.login, (r) => false);
@@ -233,5 +234,9 @@ class _TopSectionState extends State<TopSection> {
         ],
       ),
     );
+  }
+  String capitalize(String text) {
+    if (text.isEmpty) return text;
+    return text[0].toUpperCase() + text.substring(1);
   }
 }
