@@ -97,7 +97,7 @@ Through this project I worked on:
 ### Installation
 
 ```bash
-git clone <your-repository-url>
+git clone https://github.com/omar005ahmed149-eng/Recipe_App.git
 cd recipe-app
 flutter pub get
 ```
