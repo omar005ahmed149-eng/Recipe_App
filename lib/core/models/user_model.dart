@@ -20,7 +20,6 @@ class UserModel {
           name: json["name"] ?? "",
           email: json["email"] ?? "",
           phoneNumber: json["phoneNumber"] ?? "",
-          // FIX: load poster from Firestore
           poster: json["poster"] ?? "",
         );
 
@@ -30,7 +29,6 @@ class UserModel {
       "name": name,
       "email": email,
       "phoneNumber": phoneNumber,
-      // FIX: poster was missing from tojson — now it saves to Firestore
       "poster": poster,
     };
   }

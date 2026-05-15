@@ -12,10 +12,10 @@ abstract class AssetsManger {
   static const String avatarSeven = "${_base}gamer (7).png";
   static const String avatarEight = "${_base}gamer (8).png";
   static const String avatarNine = "${_base}gamer (9).png";
-  static const String poster1 = "${_base}Poster1.png";
-  static const String poster2 = "${_base}Poster2.png";
-  static const String poster3 = "${_base}Poster3.png";
-  static const String poster4 = "${_base}Poster4.png";
+  static const String poster1 = "${_base}Poster1.jpg";
+  static const String poster2 = "${_base}Poster2.jpg";
+  static const String poster3 = "${_base}Poster3.jpg";
+  static const String poster4 = "${_base}Poster4.jpg";
   static const String poster5 = "${_base}Poster5.png";
   static const String poster6 = "${_base}Poster6.png";
   static const String available = "${_base}Available.png";

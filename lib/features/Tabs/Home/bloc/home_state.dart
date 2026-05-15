@@ -14,7 +14,7 @@ class HomeState {
 
   factory HomeState.initial() => HomeState(
         activeIndex: 0,
-        currentBg:  ReciepeData.featuredReciepes[0].poster_image,
+        currentBg: ReciepeData.featuredReciepes[0].poster_image,
       );
 
   HomeState copyWith({

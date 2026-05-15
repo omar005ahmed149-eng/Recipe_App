@@ -6,11 +6,11 @@ import '../../features/Tabs/Home/Widgets/Rating_Badge.dart';
 class CategoryCard extends StatefulWidget {
   const CategoryCard({
     super.key,
-    required this.rating,
+    required this.mealName,
     required this.poster_image,
     this.recipe,
   });
-  final String rating;
+  final String mealName;
   final String poster_image;
   final ReciepeModel? recipe;
 
@@ -20,6 +20,22 @@ class CategoryCard extends StatefulWidget {
 
 class _CategoryCardState extends State<CategoryCard> {
   bool _hovered = false;
+
+  Widget _posterImage() {
+    final source = widget.poster_image;
+    if (source.startsWith('http')) {
+      return Image.network(
+        source,
+        fit: BoxFit.cover,
+        errorBuilder: (_, __, ___) => const ColoredBox(color: Colors.black26),
+      );
+    }
+    return Image.asset(
+      source,
+      fit: BoxFit.cover,
+      errorBuilder: (_, __, ___) => const ColoredBox(color: Colors.black26),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,14 +63,11 @@ class _CategoryCardState extends State<CategoryCard> {
               child: Stack(
                 fit: StackFit.expand,
                 children: [
-                  Image.asset(
-                    widget.poster_image,
-                    fit: BoxFit.cover,
-                  ),
+                  _posterImage(),
                   Positioned(
-                    top: 10,
-                    left: 10,
-                    child: RatingBadge(rating: widget.rating),
+                    bottom: 10,
+                    right: 10,
+                    child: RatingBadge(rating: widget.mealName),
                   ),
                 ],
               ),

@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:recipes/APIservice/Get_Resources.dart';
 import 'package:recipes/core/resources/colors_manger.dart';
 import 'package:recipes/features/recipe_details/recipe_details_screen.dart';
 
+import '../../../../APIservice/Categories.dart';
+import '../../../../APIservice/Meals.dart';
 import '../../../../core/resources/assets_manger.dart';
+import '../../../../core/widgets/Category_card.dart';
 import '../bloc/home_bloc.dart';
 import '../../../../core/models/recipe_Model.dart';
 import '../../../../core/models/recipes_Data.dart';
 import 'Rating_Badge.dart';
 
-class TopSection extends StatelessWidget {
+class TopSection extends StatefulWidget {
   const TopSection({super.key, required this.activeIndex});
 
   final int activeIndex;
@@ -19,6 +23,11 @@ class TopSection extends StatelessWidget {
     viewportFraction: 0.62,
   );
 
+  @override
+  State<TopSection> createState() => _TopSectionState();
+}
+
+class _TopSectionState extends State<TopSection> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -31,16 +40,31 @@ class TopSection extends StatelessWidget {
 
         SizedBox(
           height: 360.h,
-          child: PageView.builder(
-            controller: _pageController,
-            itemCount: ReciepeData.featuredReciepes.length,
-            onPageChanged: (index) {
-              context.read<HomeBloc>().add(HomePageChanged(index));
-            },
-            itemBuilder: (context, index) {
-              return HeroCard(
-                recipe: ReciepeData.featuredReciepes[index],
-                isActive: index == activeIndex,
+          child: FutureBuilder(
+            future: GetResponse.getCategories(),
+            builder: (BuildContext context,  snapshot) {
+              if (snapshot.connectionState ==
+                  ConnectionState.waiting) {
+                return const Center(
+                    child: CircularProgressIndicator());
+              }
+              if (snapshot.hasError) {
+                return const Center(child: Text("Error"));
+              }
+              List<Categories> categories = snapshot.data ?? [];
+
+              return PageView.builder(
+                controller: TopSection._pageController,
+                itemCount: categories.length,
+                onPageChanged: (index) {
+                  context.read<HomeBloc>().add(HomePageChanged(index));
+                },
+                itemBuilder: (context, index) {
+                  return CategoryCard(
+                    mealName: categories[index].strCategory??"",
+                    poster_image:categories[index].strCategoryThumb?? "",
+                  );
+                },
               );
             },
           ),

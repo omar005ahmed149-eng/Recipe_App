@@ -14,7 +14,6 @@ import 'package:recipes/core/widgets/validators.dart';
 import 'package:recipes/features/auth/widgets/custom_divider.dart';
 import 'package:recipes/features/auth/widgets/custom_navigator_button.dart';
 import 'package:recipes/features/auth/widgets/custom_textButton.dart';
-import 'package:recipes/features/auth/widgets/switch_toggle.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -128,7 +127,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void _login() async {
     if (_formKey.currentState!.validate() == false) return;
-
     try {
       UiUtils.showLoading(context);
       final user = await context.read<AuthCubit>().login(

@@ -14,7 +14,6 @@ import 'package:recipes/core/widgets/custom_text_form_field.dart';
 import 'package:recipes/core/widgets/validators.dart';
 import 'package:recipes/features/auth/widgets/custom_caroselslider.dart';
 import 'package:recipes/features/auth/widgets/custom_navigator_button.dart';
-import 'package:recipes/features/auth/widgets/switch_toggle.dart';
 
 class Registerscreen extends StatefulWidget {
   const Registerscreen({super.key});
@@ -135,7 +134,6 @@ class _RegisterscreenState extends State<Registerscreen> {
                   },
                 ),
                 SizedBox(height: 18),
-                SwitchToggle(),
               ],
             ),
           ),

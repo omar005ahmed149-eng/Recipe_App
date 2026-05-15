@@ -15,11 +15,6 @@ class RatingBadge extends StatelessWidget {
         child: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Text(
-              '★',
-              style: TextStyle(color: Color(0xFFF5C518), fontSize: 13),
-            ),
-            const SizedBox(width: 4),
             Text(
               rating,
               style: const TextStyle(

@@ -22,32 +22,23 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   final List<OnBoardingModel> pages = [
     OnBoardingModel(
       title: "Find Your Next Favorite recipe Here",
-      subtitle: "Get access to a huge library of reciepes to suit all tastes. You will surely like it.",
+      subtitle: "Get access to a huge library of recipes to suit all tastes. You will surely like it.",
       image: AssetsManger.poster1,
     ),
     OnBoardingModel(
       title: "Discover recipes",
-      subtitle: "Explore a vast collection of reciepes in all qualities and genres. Find your next favorite film with ease.",
+      subtitle: "Explore a vast collection of recipes in all ingredients and genres. Find your next favorite Food with ease.",
       image: AssetsManger.poster2,
     ),
     OnBoardingModel(
-      title: "Explore All Genres",
-      subtitle: "Discover reciepes from every genre, in all available qualities. Find something new and exciting to watch every day.",
+      title: "Explore All Food Genres",
+      subtitle: "Discover recipes from every genre, in all available ingredients. Find something new and exciting to eat every day.",
       image: AssetsManger.poster3,
     ),
     OnBoardingModel(
-      title: "Create Watchlists",
-      subtitle: "Save reciepes to your watchlist to keep track of what you want to watch next. Enjoy films in various qualities and genres.",
+      title: "Create Cook lists",
+      subtitle: "Save recipes to your Cook list to keep track of what you want to Cook next. Enjoy Food in various ingredients and genres.",
       image: AssetsManger.poster4,
-    ),
-    OnBoardingModel(
-      title: "Rate, Review and Learn",
-      subtitle: "Share your thoughts on the reciepes you've watched. Dive deep into film details and help others discover great reciepes with your reviews.",
-      image: AssetsManger.poster5,
-    ),
-    OnBoardingModel(
-      title: "Start Watching Now",
-      image: AssetsManger.poster6,
     ),
   ];
 

@@ -33,16 +33,6 @@ class _HomeTabViewState extends State<_HomeTabView> with SingleTickerProviderSta
   late final AnimationController animController;
   late final Animation<double> fadeAnimation;
   String prevUrl = ReciepeData.featuredReciepes[0].poster_image;
-  List<Widget> _buildCategorySliders() {
-    return ReciepeData.categories.entries.map((entry) {
-      return SliverToBoxAdapter(
-        child: BottomSection(
-          label: entry.key,
-          recipes: entry.value,
-        ),
-      );
-    }).toList();
-  }
   @override
   void initState() {
     super.initState();
@@ -111,7 +101,9 @@ class _HomeTabViewState extends State<_HomeTabView> with SingleTickerProviderSta
                         padding:EdgeInsetsGeometry.all(20.r) ,
                         child: Image.asset(AssetsManger.cook)),
                   ),
-                  ..._buildCategorySliders(),
+                 SliverToBoxAdapter(
+                   child: BottomSection(),
+                 ),
                   const SliverToBoxAdapter(child: SizedBox(height: 40)),
                 ],
               ),

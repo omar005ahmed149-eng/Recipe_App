@@ -13,7 +13,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     emit(state.copyWith(
       prevBg: state.currentBg,
       activeIndex: event.index,
-      currentBg:  ReciepeData.featuredReciepes[event.index].poster_image,
+      currentBg: ReciepeData.featuredReciepes[event.index].poster_image,
     ));
   }
 }

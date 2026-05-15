@@ -25,10 +25,7 @@ class _CustomizedBottomnavigationbarState extends State<CustomizedBottomnavigati
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        IndexedStack(
-          index: selectedindex,
-          children: tabs,
-        ),
+        tabs[selectedindex],
         Padding(
           padding: EdgeInsets.all(12.sp),
           child: Column(
