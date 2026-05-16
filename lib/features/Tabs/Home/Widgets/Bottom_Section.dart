@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:recipes/APIservice/Categories.dart';
 import 'package:recipes/APIservice/Meals.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 import '../../../../APIservice/Get_Resources.dart';
 import '../../../../core/widgets/Category_card.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 
 class BottomSection extends StatefulWidget {
   const BottomSection({super.key});
-
-
 
   @override
   State<BottomSection> createState() => _BottomSectionState();
@@ -17,15 +15,21 @@ class BottomSection extends StatefulWidget {
 
 class _BottomSectionState extends State<BottomSection> {
   late Future<List<Categories>?> _categoriesFuture;
-  late Future<List<Meals>?> _MealsFuture;
-  late String categoryName;
+
+  final Map<String, Future<List<Meals>?>> _mealsFutureCache = {};
+
+
+  Future<List<Meals>?> _getMealsFuture(String category) {
+    return _mealsFutureCache.putIfAbsent(
+      category,
+          () => GetResponse.getMeals(category),
+    );
+  }
 
   @override
   void initState() {
     super.initState();
-    categoryName = '';
     _categoriesFuture = GetResponse.getCategories();
-    _MealsFuture = GetResponse.getMeals(categoryName);
   }
 
   @override
@@ -81,13 +85,16 @@ class _BottomSectionState extends State<BottomSection> {
                 SizedBox(
                   height: 200,
                   child: FutureBuilder<List<Meals>?>(
-                    future: GetResponse.getMeals(categories[index].strCategory ?? ''),
+                    future: _getMealsFuture(
+                      categories[index].strCategory ?? '',
+                    ),
                     builder: (context, mealSnapshot) {
                       if (mealSnapshot.connectionState ==
                           ConnectionState.waiting) {
                         return const Center(
                             child: CircularProgressIndicator());
                       }
+
                       if (mealSnapshot.hasError) {
                         return const Center(child: Text("Error"));
                       }

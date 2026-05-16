@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:recipes/core/resources/assets_manger.dart';
 import 'package:recipes/core/resources/colors_manger.dart';
-import 'package:recipes/core/models/recipes_Data.dart';
 
 import 'bloc/home_bloc.dart';
 import 'Widgets/Bottom_Section.dart';
@@ -29,10 +28,13 @@ class _HomeTabView extends StatefulWidget {
   State<_HomeTabView> createState() => _HomeTabViewState();
 }
 
-class _HomeTabViewState extends State<_HomeTabView> with SingleTickerProviderStateMixin{
+class _HomeTabViewState extends State<_HomeTabView>
+    with SingleTickerProviderStateMixin {
   late final AnimationController animController;
   late final Animation<double> fadeAnimation;
-  String prevUrl = ReciepeData.featuredReciepes[0].poster_image;
+
+  String prevUrl = '';
+
   @override
   void initState() {
     super.initState();
@@ -56,14 +58,12 @@ class _HomeTabViewState extends State<_HomeTabView> with SingleTickerProviderSta
   Widget build(BuildContext context) {
     return BlocConsumer<HomeBloc, HomeState>(
       listener: (context, state) {
-        prevUrl = prevUrl;
-        animController.forward(from: 0);
-        setState(() {
-          animController.forward(from: 0).then((_) {
+      animController.forward(from: 0).then((_) {
+          if (mounted) {
             setState(() {
               prevUrl = state.currentBackgroundUrl;
             });
-          });
+          }
         });
       },
       builder: (context, state) {
@@ -72,9 +72,11 @@ class _HomeTabViewState extends State<_HomeTabView> with SingleTickerProviderSta
           backgroundColor: ColorsManger.black,
           body: Stack(
             children: [
-
-              BlurredBackground(prevUrl: prevUrl, currentUrl: currentUrl, animation: fadeAnimation),
-
+              BlurredBackground(
+                prevUrl: prevUrl,
+                currentUrl: currentUrl,
+                animation: fadeAnimation,
+              ),
               Container(
                 decoration: const BoxDecoration(
                   gradient: LinearGradient(
@@ -90,7 +92,6 @@ class _HomeTabViewState extends State<_HomeTabView> with SingleTickerProviderSta
                   ),
                 ),
               ),
-
               CustomScrollView(
                 slivers: [
                   SliverToBoxAdapter(
@@ -98,12 +99,13 @@ class _HomeTabViewState extends State<_HomeTabView> with SingleTickerProviderSta
                   ),
                   SliverToBoxAdapter(
                     child: Padding(
-                        padding:EdgeInsetsGeometry.all(20.r) ,
-                        child: Image.asset(AssetsManger.cook)),
+                      padding: EdgeInsetsGeometry.all(20.r),
+                      child: Image.asset(AssetsManger.cook),
+                    ),
                   ),
-                 SliverToBoxAdapter(
-                   child: BottomSection(),
-                 ),
+                  SliverToBoxAdapter(
+                    child: BottomSection(),
+                  ),
                   const SliverToBoxAdapter(child: SizedBox(height: 40)),
                 ],
               ),

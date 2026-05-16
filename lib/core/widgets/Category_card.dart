@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:recipes/core/models/recipe_Model.dart';
 import 'package:recipes/features/recipe_details/recipe_details_screen.dart';
 import '../../features/Tabs/Home/Widgets/Rating_Badge.dart';
@@ -23,13 +24,25 @@ class _CategoryCardState extends State<CategoryCard> {
 
   Widget _posterImage() {
     final source = widget.poster_image;
+
     if (source.startsWith('http')) {
-      return Image.network(
-        source,
+      return CachedNetworkImage(
+        imageUrl: source,
         fit: BoxFit.cover,
-        errorBuilder: (_, __, ___) => const ColoredBox(color: Colors.black26),
+        placeholder: (_, __) => const ColoredBox(
+          color: Colors.black26,
+          child: Center(
+            child: SizedBox(
+              width: 24,
+              height: 24,
+              child: CircularProgressIndicator(strokeWidth: 2),
+            ),
+          ),
+        ),
+        errorWidget: (_, __, ___) => const ColoredBox(color: Colors.black26),
       );
     }
+
     return Image.asset(
       source,
       fit: BoxFit.cover,

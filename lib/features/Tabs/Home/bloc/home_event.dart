@@ -4,5 +4,7 @@ abstract class HomeEvent {}
 
 class HomePageChanged extends HomeEvent {
   final int index;
-  HomePageChanged(this.index);
+  final String backgroundUrl;
+
+  HomePageChanged(this.index, this.backgroundUrl);
 }

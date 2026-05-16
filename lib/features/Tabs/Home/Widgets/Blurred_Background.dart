@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class BlurredBackground extends StatelessWidget {
   final String prevUrl;
@@ -6,6 +7,7 @@ class BlurredBackground extends StatelessWidget {
   final Animation<double> animation;
 
   const BlurredBackground({
+    super.key,
     required this.prevUrl,
     required this.currentUrl,
     required this.animation,
@@ -26,12 +28,17 @@ class BlurredBackground extends StatelessWidget {
   }
 
   Widget _buildBgImage(String url) {
-    return Image.asset(
-      url,
-      fit: BoxFit.cover,
-      color: Colors.black.withOpacity(0.78),
-      colorBlendMode: BlendMode.darken,
-      errorBuilder: (_, __, ___) => const ColoredBox(color: Color(0xFF0a0a0f)),
-    );
+    if (url.isEmpty) {
+      return const ColoredBox(color: Color(0xFF0a0a0f));
+    }
+
+      return CachedNetworkImage(
+        imageUrl: url,
+        fit: BoxFit.cover,
+        color: Colors.black.withOpacity(0.78),
+        colorBlendMode: BlendMode.darken,
+        placeholder: (_, __) => const ColoredBox(color: Color(0xFF0a0a0f)),
+        errorWidget: (_, __, ___) => const ColoredBox(color: Color(0xFF0a0a0f)),
+      );
   }
 }
